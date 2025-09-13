@@ -17,9 +17,9 @@ public class Empleado extends javax.swing.JFrame {
     Connection con;
     
     //HOLA MUNDO
-    /**
-     * Creates new form Empleado
-     */
+    
+    //COMO ESTA :o
+    
     public Empleado() throws SQLException {
         initComponents();
           con= conexionPostgres.getConection();
