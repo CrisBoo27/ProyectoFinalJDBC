@@ -72,6 +72,11 @@ public class Empleado extends javax.swing.JFrame {
         });
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +221,40 @@ public class Empleado extends javax.swing.JFrame {
           e.getMessage();
       } 
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    
+    public void ActualizarEmpleadoPS(){
+        try{
+            //Extraigo los valores que tiene en la interfaz de los JText
+            int id =   Integer.parseInt(txtId.getText());
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
+            String salario = txtSalario.getText();
+            
+          //ES MI SENTENCIA O EL QRY QUE VOY A INSERTAR
+          String qry = "update public.empleado set nombre = ?, apellido = ?, salario = ? where id_empleado = ?";
+          
+          //Espacio de trabajo que lleva la conexiopn para escribir sentencias QRY
+          PreparedStatement ps = con.prepareStatement(qry);
+          //aca le damos valor a cada una de las variables
+          ps.setString(1,nombre);
+          ps.setString(2,apellido);
+          ps.setDouble(3,Double.parseDouble(salario) );
+          ps.setInt(4,id);
+          
+          int filasActualizadas = ps.executeUpdate(); // EJECUTA LA SENTENCIA A LA BASE DE DATOS LA CUAL RETORNA UN INT
+          JOptionPane.showMessageDialog(null,"Total de Registros actualizados" + filasActualizadas);
+          ps.close();
+          
+      } catch (SQLException e){
+          e.getMessage();
+      } 
+    }
+    
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+
+        ActualizarEmpleadoPS();
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     /**
      * @param args the command line arguments
